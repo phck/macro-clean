@@ -2,6 +2,7 @@ macro-clean
 ===========
 
 Kills unused macro definitions in latex projects.
+Appropriately handles macros which use other macros.
 
 # Inputs: 
 
@@ -19,3 +20,11 @@ or
 
     ghc macroclean
     ./macroclean macros_file.sty file1.tex file2.tex > new_macros_file.sty
+
+Example inputs are provided. Compare the output of
+
+    ./macroclean sample_macros.sty sample1.tex
+
+and
+
+    ./macroclean sample_macros.sty sample1.tex sample2.tex

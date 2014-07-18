@@ -1,0 +1,27 @@
+% This command is used in sample1.tex.
+\newcommand{\firstMacro}{3x^5 + 2}
+
+% This command isn't used anywhere, so it will get stripped out.
+% But these comments will not. In fact, anything that isn't
+% a command definition on a single line should be left alone.
+\newcommand{\unusedMacro}{This is sad.}
+
+% These will both be stripped out.
+% This is because \unusedNestBottom is only ever used in the
+% definition of \unusedNestTop which is not used anywhere else.
+\newcommand{\unusedNestBottom}{Something or Other \upperNestBot}
+\newcommand{\unusedNestTop}{Something, \unusedNestBottom}
+
+% Since \upperNestTop is called, all four of the following will
+% be retained.
+\newcommand{\nestBot}{{3x-2}}
+\newcommand{\nestMidA}{{8^\nestBot}}
+\newcommand{\nestMidB}{{95}}
+\newcommand{\nestTop}{X^\nestMidA_\nestMidB + 8}
+
+% This is used in sample2.tex.
+%   macroclean sample_macros.sty sample1.tex
+% will strip this line, while
+%   macroclean sample_macros.sty sample1.tex sample2.tex
+% will retain it.
+\newcommand{\macroSecondFile}{\int_0^1 x^2\, dx}
