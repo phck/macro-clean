@@ -12,19 +12,34 @@ Appropriately handles macros which use other macros.
 Finds all unused macro definitions and sends to stdout the macro
 file, omitting the unused lines.
 
+# Compile:
+
+From the root directory, run
+
+    $ ghc macroclean
+
 # Sample Usage:
 
-    ghc -i macroclean.hs macros_file.sty file1.tex file2.tex > new_macros_file.sty
+From the "example" subdirectory, run
 
-or  
+    $ ghc ../macroclean sample_macros.sty sample1.tex sample2.tex > output.sty
 
-    ghc macroclean
-    ./macroclean macros_file.sty file1.tex file2.tex > new_macros_file.sty
+Compare the output
 
-Example inputs are provided. Compare the output of
+    $ diff sample_macros.sty output.sty
+    7d6
+    < \newcommand{\unusedMacro}{This is sad.}
+    12,13d10
+    < \newcommand{\unusedNestBottom}{Something or Other \upperNestBot}
+    < \newcommand{\unusedNestTop}{Something, \unusedNestBottom}
+    27c24
+    < \newcommand{\macroSecondFile}{\int_0^1 x^2\, dx}
+    \ No newline at end of file
+    ---
+    > \newcommand{\macroSecondFile}{\int_0^1 x^2\, dx}
 
-    ./macroclean sample_macros.sty sample1.tex
+The expected output is in `example/expected_output.sty`
 
-and
+   $ diff -s expected_output.sty output.sty
+   Files expected_output.sty and output.sty are identical
 
-    ./macroclean sample_macros.sty sample1.tex sample2.tex
