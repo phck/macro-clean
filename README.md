@@ -40,6 +40,6 @@ Compare the output
 
 The expected output is in `example/expected_output.sty`
 
-   $ diff -s expected_output.sty output.sty
-   Files expected_output.sty and output.sty are identical
+    $ diff -s expected_output.sty output.sty
+    Files expected_output.sty and output.sty are identical
 
