@@ -37,7 +37,7 @@ stripCmdList :: Eq a => [[a]] -> [a] -> Maybe [a]
 stripCmdList prefixes = listToMaybe . stripCmdList' prefixes
 stripCmdList' :: Eq a => [[a]] -> [a] -> [[a]]
 stripCmdList' prefixes toStrip = 
-	mapMaybe (flip stripPrefix toStrip) prefixes
+    mapMaybe (flip stripPrefix toStrip) prefixes
 
 stripCmdType :: String -> Maybe String
 stripCmdType = stripCmdList  
@@ -49,11 +49,11 @@ stripCmdType = stripCmdList
 
 findCommands :: String -> [Command]
 findCommands str 
-  | null (killPrefix str) 	= []
-  | otherwise	 			= ('\\' : noSlash) : (findCommands rest)
+  | null (killPrefix str)     = []
+  | otherwise                 = ('\\' : noSlash) : (findCommands rest)
   where
-  	killPrefix = dropWhile (/= '\\')
-  	(noSlash, rest) = span isAlphaNum (tail (killPrefix str))
+    killPrefix = dropWhile (/= '\\')
+    (noSlash, rest) = span isAlphaNum (tail (killPrefix str))
 
 findCommands' :: String -> [Command]
 findCommands' = nub . findCommands
